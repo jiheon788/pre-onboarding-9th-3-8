@@ -1,5 +1,6 @@
 import { getTimeSeriesData } from '@/api/mock';
 import CustomTooltip from '@/components/CustomTooltip';
+import { ITimeSeriesItem } from '@/interface/main';
 import { useEffect, useState } from 'react';
 import {
   ComposedChart,
@@ -13,7 +14,7 @@ import {
 } from 'recharts';
 
 const ChartPage = () => {
-  const [timeSeries, setTimeSeries] = useState<any[]>([]);
+  const [timeSeries, setTimeSeries] = useState<ITimeSeriesItem[]>([]);
 
   useEffect(() => {
     getTimeSeriesData().then((res) => {
