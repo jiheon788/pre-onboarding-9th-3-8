@@ -31,29 +31,27 @@ ChartJS.register(
 export const ChartPage = () => {
   const [areaData, setAreaData] = useState<number[]>([]);
   const [barData, setBarData] = useState<number[]>([]);
+  const [idData, setIdData] = useState<string[]>([]);
   const [labels, setLabels] = useState<string[]>([]);
 
   useEffect(() => {
     getTimeSeriesData().then((res) => {
       setLabels(Object.keys(res.data.response));
-
       setAreaData(
         Object.keys(res.data.response).map(
           (key) => res.data.response[key].value_area,
         ),
       );
-
       setBarData(
         Object.keys(res.data.response).map(
           (key) => res.data.response[key].value_bar,
         ),
       );
+      setIdData(
+        Object.keys(res.data.response).map((key) => res.data.response[key].id),
+      );
     });
   }, []);
-
-  useEffect(() => {
-    console.log(areaData);
-  }, [areaData]);
 
   const options = {
     responsive: true,
@@ -66,6 +64,11 @@ export const ChartPage = () => {
       title: {
         display: true,
         text: 'Chart.js Line Chart - Multi Axis',
+      },
+      tooltip: {
+        callbacks: {
+          footer: (tooltipItems: any) => idData[tooltipItems[0].dataIndex],
+        },
       },
     },
     scales: {
