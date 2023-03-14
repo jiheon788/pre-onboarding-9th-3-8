@@ -29,26 +29,14 @@ ChartJS.register(
 );
 
 export const ChartPage = () => {
-  const [areaData, setAreaData] = useState<number[]>([]);
-  const [barData, setBarData] = useState<number[]>([]);
-  const [idData, setIdData] = useState<string[]>([]);
-  const [labels, setLabels] = useState<string[]>([]);
+  const [timeSeries, setTimeSeries] = useState<any[]>([]);
 
   useEffect(() => {
     getTimeSeriesData().then((res) => {
-      setLabels(Object.keys(res.data.response));
-      setAreaData(
-        Object.keys(res.data.response).map(
-          (key) => res.data.response[key].value_area,
-        ),
-      );
-      setBarData(
-        Object.keys(res.data.response).map(
-          (key) => res.data.response[key].value_bar,
-        ),
-      );
-      setIdData(
-        Object.keys(res.data.response).map((key) => res.data.response[key].id),
+      setTimeSeries(
+        Object.keys(res.data.response).map((time) => {
+          return { time, ...res.data.response[time] };
+        }),
       );
     });
   }, []);
@@ -59,15 +47,11 @@ export const ChartPage = () => {
       mode: 'index' as const,
       intersect: false,
     },
-    stacked: false,
     plugins: {
-      title: {
-        display: true,
-        text: 'Chart.js Line Chart - Multi Axis',
-      },
       tooltip: {
         callbacks: {
-          footer: (tooltipItems: any) => idData[tooltipItems[0].dataIndex],
+          footer: (tooltipItems: any) =>
+            timeSeries[tooltipItems[0].dataIndex].id,
         },
       },
     },
@@ -89,13 +73,13 @@ export const ChartPage = () => {
   };
 
   const data = {
-    labels,
+    labels: timeSeries.map((cur: any) => cur.time),
     datasets: [
       {
         type: 'line' as const,
         fill: true,
         label: 'value_area',
-        data: areaData,
+        data: timeSeries.map((cur: any) => cur.value_area),
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
         yAxisID: 'y',
@@ -104,9 +88,8 @@ export const ChartPage = () => {
         type: 'bar' as const,
         label: 'value_bar',
         backgroundColor: 'rgb(75, 192, 192)',
-        data: barData,
+        data: timeSeries.map((cur: any) => cur.value_bar),
         borderColor: 'white',
-        borderWidth: 2,
         yAxisID: 'y1',
       },
     ],
