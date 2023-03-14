@@ -1,34 +1,18 @@
 import { getTimeSeriesData } from '@/api/mock';
+import CustomTooltip from '@/components/CustomTooltip';
 import { useEffect, useState } from 'react';
 import {
-  Chart as ChartJS,
-  LinearScale,
-  CategoryScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  Legend,
+  ComposedChart,
+  Area,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
   Tooltip,
-  LineController,
-  BarController,
-  Filler,
-} from 'chart.js';
-import { Chart } from 'react-chartjs-2';
-
-ChartJS.register(
-  LinearScale,
-  CategoryScale,
-  BarElement,
-  PointElement,
-  LineElement,
   Legend,
-  Tooltip,
-  LineController,
-  BarController,
-  Filler,
-);
+} from 'recharts';
 
-export const ChartPage = () => {
+const ChartPage = () => {
   const [timeSeries, setTimeSeries] = useState<any[]>([]);
 
   useEffect(() => {
@@ -41,61 +25,50 @@ export const ChartPage = () => {
     });
   }, []);
 
-  const options = {
-    responsive: true,
-    interaction: {
-      mode: 'index' as const,
-      intersect: false,
-    },
-    plugins: {
-      tooltip: {
-        callbacks: {
-          footer: (tooltipItems: any) =>
-            timeSeries[tooltipItems[0].dataIndex].id,
-        },
-      },
-    },
-    scales: {
-      y: {
-        type: 'linear' as const,
-        display: true,
-        position: 'left' as const,
-      },
-      y1: {
-        type: 'linear' as const,
-        display: true,
-        position: 'right' as const,
-        grid: {
-          drawOnChartArea: false,
-        },
-      },
-    },
-  };
-
-  const data = {
-    labels: timeSeries.map((cur: any) => cur.time),
-    datasets: [
-      {
-        type: 'line' as const,
-        fill: true,
-        label: 'value_area',
-        data: timeSeries.map((cur: any) => cur.value_area),
-        borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        yAxisID: 'y',
-      },
-      {
-        type: 'bar' as const,
-        label: 'value_bar',
-        backgroundColor: 'rgb(75, 192, 192)',
-        data: timeSeries.map((cur: any) => cur.value_bar),
-        borderColor: 'white',
-        yAxisID: 'y1',
-      },
-    ],
-  };
-
-  return <Chart type="line" data={data} options={options} />;
+  return (
+    <ComposedChart
+      width={1000}
+      height={400}
+      data={timeSeries}
+      margin={{
+        top: 20,
+        right: 80,
+        bottom: 20,
+        left: 20,
+      }}
+    >
+      <CartesianGrid stroke="#f5f5f5" />
+      <XAxis
+        dataKey="time"
+        label={{
+          value: 'value_bar',
+          position: 'insideBottomRight',
+          offset: 0,
+        }}
+        scale="band"
+      />
+      <YAxis
+        yAxisId="left"
+        orientation="left"
+        label={{ value: 'value_bar', position: 'top' }}
+      />
+      <YAxis
+        yAxisId="right"
+        orientation="right"
+        label={{ value: 'value_area', position: 'top' }}
+      />
+      <Tooltip content={<CustomTooltip />} />
+      <Legend />
+      <Bar yAxisId="left" dataKey="value_bar" barSize={20} fill="#413ea0" />
+      <Area
+        yAxisId="right"
+        type="monotone"
+        dataKey="value_area"
+        fill="#8884d8"
+        stroke="#8884d8"
+      />
+    </ComposedChart>
+  );
 };
 
 export default ChartPage;
