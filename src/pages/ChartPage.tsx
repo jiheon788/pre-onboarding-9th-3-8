@@ -1,5 +1,6 @@
 import { getTimeSeriesData } from '@/api/mock';
 import CustomTooltip from '@/components/CustomTooltip';
+import { Palette } from '@/constants/styles';
 import { ITimeSeriesItem } from '@/interface/main';
 import { useEffect, useState } from 'react';
 import {
@@ -60,13 +61,18 @@ const ChartPage = () => {
       />
       <Tooltip content={<CustomTooltip />} />
       <Legend />
-      <Bar yAxisId="left" dataKey="value_bar" barSize={20} fill="#413ea0" />
+      <Bar
+        yAxisId="left"
+        dataKey="value_bar"
+        barSize={20}
+        fill={Palette.AQUA}
+      />
       <Area
         yAxisId="right"
         type="monotone"
         dataKey="value_area"
-        fill="#8884d8"
-        stroke="#8884d8"
+        fill={Palette.ORANGE}
+        stroke={Palette.ORANGE}
       />
     </ComposedChart>
   );
