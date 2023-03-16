@@ -8,6 +8,7 @@ import {
   Bar,
   ComposedChart,
   ResponsiveContainer,
+  Cell,
 } from 'recharts';
 import CustomTooltip from '@/components/CustomTooltips';
 import useFetch from '@/lib/hooks/useFetch';
@@ -32,7 +33,6 @@ const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const ID = searchParams.get('id');
 
-  console.log(ID);
   useEffect(() => {
     setUniqueIds(getUniqueIds(chartData));
   }, [chartData]);
@@ -83,7 +83,6 @@ const Home = () => {
             <YAxis
               yAxisId="right"
               orientation="right"
-              domain={[0, 150]}
               label={{ value: 'value_area', position: 'top', offset: 20 }}
             />
             <Tooltip
@@ -91,12 +90,15 @@ const Home = () => {
               wrapperStyle={{ outline: 'none' }}
             />
             <Legend />
-            <Bar
-              yAxisId="left"
-              dataKey="value_bar"
-              fill="#868e96"
-              barSize={20}
-            />
+            <Bar yAxisId="left" dataKey="value_bar" fill="black" barSize={20}>
+              {chartData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={entry.id === ID ? 'red' : 'black'}
+                  onClick={() => onClickId(entry.id)}
+                />
+              ))}
+            </Bar>
             <Area
               yAxisId="right"
               type="monotone"
