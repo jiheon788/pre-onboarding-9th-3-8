@@ -22,7 +22,7 @@ import { getUniqueIds } from '@/lib/utils/getUniqueItems';
 import { useSearchParams } from 'react-router-dom';
 import CustomDot from '@/components/CustomDot';
 
-const Home = () => {
+const ChartPage = () => {
   const [chartData, isLoading, isError] = useFetch<IChart[]>(
     [],
     API_URL,
@@ -30,29 +30,25 @@ const Home = () => {
   );
   const navigate = useNavigate();
   const [uniqueIds, setUniqueIds] = useState<string[]>([]);
-  const { start, end } = generateStartAndEndDate(chartData);
+  const { startDate, endDate } = generateStartAndEndDate(chartData);
   const [searchParams] = useSearchParams();
-  const ID = searchParams.get('id');
+  const QUERY_ID = searchParams.get('id');
 
   useEffect(() => {
     setUniqueIds(getUniqueIds(chartData));
   }, [chartData]);
 
-  const onReset = () => {
-    navigate('/chart');
-  };
-
-  const onFilter = (id: string) => {
-    navigate(`/chart?id=${id}`);
+  const onFilter = (id?: string) => {
+    navigate(`/chart${id && `?id=${id}`}`);
   };
 
   if (isLoading) return <>Loading...</>;
   if (isError) return <>Error...</>;
   return (
     <div className="outer">
-      <h1>{`${start} ~ ${end}`}</h1>
+      <h1>{`${startDate} ~ ${endDate}`}</h1>
       <div>
-        <button type="button" onClick={() => onReset()}>
+        <button type="button" onClick={() => onFilter()}>
           Reset
         </button>
         {uniqueIds.map((uniqueId) => (
@@ -95,7 +91,7 @@ const Home = () => {
               {chartData.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
-                  fill={entry.id === ID ? 'red' : 'black'}
+                  fill={entry.id === QUERY_ID ? 'red' : 'black'}
                   onClick={() => onFilter(entry.id)}
                 />
               ))}
@@ -112,7 +108,7 @@ const Home = () => {
                   payload={props.payload}
                   cx={props.cx}
                   cy={props.cy}
-                  id={ID}
+                  id={QUERY_ID}
                 />
               )}
             />
@@ -123,4 +119,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default ChartPage;

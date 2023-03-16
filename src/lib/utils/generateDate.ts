@@ -7,12 +7,14 @@ const generateStartAndEndDate = (data: IChart[]) => {
   const dateList = data.map(({ date }) => new Date(date));
 
   const min = minDate(dateList);
-  const start = `${min.getFullYear()}-${min.getMonth() + 1}-${min.getDate()}`;
+  const startDate = `${min.getFullYear()}-${
+    min.getMonth() + 1
+  }-${min.getDate()}`;
 
   const max = maxDate(dateList);
-  const end = `${max.getFullYear()}-${max.getMonth() + 1}-${max.getDate()}`;
+  const endDate = `${max.getFullYear()}-${max.getMonth() + 1}-${max.getDate()}`;
 
-  return { start, end };
+  return { startDate, endDate };
 };
 
 export default generateStartAndEndDate;

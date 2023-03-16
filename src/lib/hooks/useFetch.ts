@@ -5,7 +5,7 @@ const useFetch = <T>(
   defaultValue: T,
   url: string,
   preProcessData: any = null,
-) => {
+): [T, boolean, boolean] => {
   const [payload, setPayload] = useState(defaultValue);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -24,7 +24,7 @@ const useFetch = <T>(
       .finally(() => setIsLoading(false));
   }, [preProcessData, url]);
 
-  return [payload, isLoading, isError] as [T, boolean, boolean];
+  return [payload, isLoading, isError];
 };
 
 export default useFetch;
