@@ -1,4 +1,3 @@
-import useChart from '@/lib/hooks/useChart';
 import {
   XAxis,
   YAxis,
@@ -11,17 +10,30 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import CustomTooltip from '@/components/CustomTooltips';
+import useFetch from '@/lib/hooks/useFetch';
+import { API_URL } from '@/constants/url';
+import transformData from '@/lib/utils/transformData';
+import { Navigate } from 'react-router';
+import { IChart } from '@/interface/chartData';
+import { generateStartAndEndDate } from '@/lib/utils/generateDate';
 
 const Home = () => {
-  const { charts, start, end } = useChart();
+  const [chartData, isLoading, isError] = useFetch<IChart[]>(
+    [],
+    API_URL,
+    transformData,
+  );
+  const { start, end } = generateStartAndEndDate(chartData as IChart[]);
 
+  if (isLoading) return <>Loading...</>;
+  if (isError) return <Navigate to="/" />;
   return (
     <div className="outer">
       <h1>{`${start} ~ ${end}`}</h1>
       <div className="inner">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart
-            data={charts}
+            data={chartData as IChart[]}
             margin={{
               top: 40,
               right: 30,
