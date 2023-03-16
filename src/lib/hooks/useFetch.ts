@@ -24,7 +24,7 @@ const useFetch = <T>(
       .finally(() => setIsLoading(false));
   }, [preProcessData, url]);
 
-  return [payload, isLoading, isError];
+  return [payload, isLoading, isError] as [T, boolean, boolean];
 };
 
 export default useFetch;

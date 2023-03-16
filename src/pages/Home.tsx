@@ -13,9 +13,12 @@ import CustomTooltip from '@/components/CustomTooltips';
 import useFetch from '@/lib/hooks/useFetch';
 import { API_URL } from '@/constants/url';
 import generateMixedKeyAndValueArr from '@/lib/utils/generateMixedKeyAndValueArr';
-import { Navigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { IChart } from '@/interface/chartData';
 import generateStartAndEndDate from '@/lib/utils/generateDate';
+import { useEffect, useState } from 'react';
+import { getUniqueIds } from '@/lib/utils/getUniqueItems';
+import { useSearchParams } from 'react-router-dom';
 
 const Home = () => {
   const [chartData, isLoading, isError] = useFetch<IChart[]>(
@@ -23,17 +26,48 @@ const Home = () => {
     API_URL,
     generateMixedKeyAndValueArr,
   );
-  const { start, end } = generateStartAndEndDate(chartData as IChart[]);
+  const navigate = useNavigate();
+  const [uniqueIds, setUniqueIds] = useState<string[]>([]);
+  const { start, end } = generateStartAndEndDate(chartData);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const ID = searchParams.get('id');
+
+  console.log(ID);
+  useEffect(() => {
+    setUniqueIds(getUniqueIds(chartData));
+  }, [chartData]);
+
+  const onClickReset = () => {
+    navigate('/chart');
+  };
+
+  const onClickId = (id: string) => {
+    navigate(`/chart?id=${id}`);
+  };
 
   if (isLoading) return <>Loading...</>;
-  if (isError) return <Navigate to="/" />;
+  if (isError) return <>Error...</>;
   return (
     <div className="outer">
       <h1>{`${start} ~ ${end}`}</h1>
+      <div>
+        <button type="button" onClick={() => onClickReset()}>
+          Reset
+        </button>
+        {uniqueIds.map((uniqueId) => (
+          <button
+            key={uniqueId}
+            type="button"
+            onClick={() => onClickId(uniqueId)}
+          >
+            {uniqueId}
+          </button>
+        ))}
+      </div>
       <div className="inner">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart
-            data={chartData as IChart[]}
+            data={chartData}
             margin={{
               top: 40,
               right: 30,
