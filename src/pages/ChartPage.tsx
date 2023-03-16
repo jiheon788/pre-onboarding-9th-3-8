@@ -39,7 +39,7 @@ const ChartPage = () => {
   }, [chartData]);
 
   const onFilter = (id?: string) => {
-    navigate(`/chart${id && `?id=${id}`}`);
+    navigate(`/chart${id ? `?id=${id}` : ''}`);
   };
 
   if (isLoading) return <>Loading...</>;
