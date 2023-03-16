@@ -20,7 +20,7 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint", "import"],
   "rules": {
     // 리액트 17버전 이후는 jsx 문법 사용시 React를 import 하지 않아도 되어서 off
     "react/react-in-jsx-scope": 0,
@@ -41,6 +41,28 @@
     //  Disallow specified global variables.
     "no-restricted-globals": "off",
     //  Enforce return statements in callbacks of array methods.
-    "array-callback-return": "off"
+    "array-callback-return": "off",
+    "import/order": [
+      "error", {
+        "groups": [
+          "builtin", 
+          "external", 
+          "internal", 
+          "parent",
+          "sibling", 
+          "index", 
+          "object",
+          "type"
+        ],
+        "pathGroups": [
+          {
+              "pattern": "@/**",
+              "group": "external",
+              "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"]
+      }
+  ]
   }
 }

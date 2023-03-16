@@ -1,3 +1,6 @@
+import { useNavigate } from 'react-router';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   XAxis,
   YAxis,
@@ -14,12 +17,9 @@ import CustomTooltip from '@/components/CustomTooltips';
 import useFetch from '@/lib/hooks/useFetch';
 import { API_URL } from '@/constants/url';
 import generateMixedKeyAndValueArr from '@/lib/utils/generateMixedKeyAndValueArr';
-import { useNavigate } from 'react-router';
 import { IChart } from '@/interface/chartData';
 import generateStartAndEndDate from '@/lib/utils/generateDate';
-import { useEffect, useState } from 'react';
 import { getUniqueIds } from '@/lib/utils/getUniqueItems';
-import { useSearchParams } from 'react-router-dom';
 import CustomDot from '@/components/CustomDot';
 
 const ChartPage = () => {
