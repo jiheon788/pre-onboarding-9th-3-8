@@ -12,16 +12,16 @@ import {
 import CustomTooltip from '@/components/CustomTooltips';
 import useFetch from '@/lib/hooks/useFetch';
 import { API_URL } from '@/constants/url';
-import transformData from '@/lib/utils/transformData';
+import generateMixedKeyAndValueArr from '@/lib/utils/generateMixedKeyAndValueArr';
 import { Navigate } from 'react-router';
 import { IChart } from '@/interface/chartData';
-import { generateStartAndEndDate } from '@/lib/utils/generateDate';
+import generateStartAndEndDate from '@/lib/utils/generateDate';
 
 const Home = () => {
   const [chartData, isLoading, isError] = useFetch<IChart[]>(
     [],
     API_URL,
-    transformData,
+    generateMixedKeyAndValueArr,
   );
   const { start, end } = generateStartAndEndDate(chartData as IChart[]);
 

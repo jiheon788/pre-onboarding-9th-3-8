@@ -3,7 +3,7 @@ import { IChart } from '@/interface/chartData';
 const maxDate = (dates: Date[]) => new Date(Math.max(...dates.map(Number)));
 const minDate = (dates: Date[]) => new Date(Math.min(...dates.map(Number)));
 
-export const generateStartAndEndDate = (data: IChart[]) => {
+const generateStartAndEndDate = (data: IChart[]) => {
   const dateList = data.map(({ date }) => new Date(date));
 
   const min = minDate(dateList);
@@ -14,3 +14,5 @@ export const generateStartAndEndDate = (data: IChart[]) => {
 
   return { start, end };
 };
+
+export default generateStartAndEndDate;
