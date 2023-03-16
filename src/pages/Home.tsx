@@ -20,6 +20,7 @@ import generateStartAndEndDate from '@/lib/utils/generateDate';
 import { useEffect, useState } from 'react';
 import { getUniqueIds } from '@/lib/utils/getUniqueItems';
 import { useSearchParams } from 'react-router-dom';
+import CustomDot from '@/components/CustomDot';
 
 const Home = () => {
   const [chartData, isLoading, isError] = useFetch<IChart[]>(
@@ -30,18 +31,18 @@ const Home = () => {
   const navigate = useNavigate();
   const [uniqueIds, setUniqueIds] = useState<string[]>([]);
   const { start, end } = generateStartAndEndDate(chartData);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const ID = searchParams.get('id');
 
   useEffect(() => {
     setUniqueIds(getUniqueIds(chartData));
   }, [chartData]);
 
-  const onClickReset = () => {
+  const onReset = () => {
     navigate('/chart');
   };
 
-  const onClickId = (id: string) => {
+  const onFilter = (id: string) => {
     navigate(`/chart?id=${id}`);
   };
 
@@ -51,14 +52,14 @@ const Home = () => {
     <div className="outer">
       <h1>{`${start} ~ ${end}`}</h1>
       <div>
-        <button type="button" onClick={() => onClickReset()}>
+        <button type="button" onClick={() => onReset()}>
           Reset
         </button>
         {uniqueIds.map((uniqueId) => (
           <button
             key={uniqueId}
             type="button"
-            onClick={() => onClickId(uniqueId)}
+            onClick={() => onFilter(uniqueId)}
           >
             {uniqueId}
           </button>
@@ -95,7 +96,7 @@ const Home = () => {
                 <Cell
                   key={`cell-${index}`}
                   fill={entry.id === ID ? 'red' : 'black'}
-                  onClick={() => onClickId(entry.id)}
+                  onClick={() => onFilter(entry.id)}
                 />
               ))}
             </Bar>
@@ -105,6 +106,15 @@ const Home = () => {
               dataKey="value_area"
               stroke="#ff8787"
               fill="#ffa8a8"
+              dot={(props: any) => (
+                <CustomDot
+                  key={props.key}
+                  payload={props.payload}
+                  cx={props.cx}
+                  cy={props.cy}
+                  id={ID}
+                />
+              )}
             />
           </ComposedChart>
         </ResponsiveContainer>
