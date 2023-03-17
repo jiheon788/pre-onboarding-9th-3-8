@@ -2,16 +2,14 @@
 
 [AI기반 RPA 기술에 특화된 벤처기업 플렉시스 기업](http://flexsys.co.kr/) 과제 입니다.
 
-### **🔗 결과 링크**
+## [결과물 바로가기](https://pre-onboarding-9th-3-8.netlify.app/chart)
 
-- [최종 결과물 바로가기](https://pre-onboarding-9th-3-8.netlify.app/chart)
-
-## **📝 과제 목적**
+## 과제 목적
 
 - 주어진 데이터를 기반으로 시계열 차트 만들기
 - Best Practice 만들어 제출하기
 
-## ✅ 과제 진행 방법
+## 과제 진행 방법
 
 [기능 구현 목록](./REQUIREMENTS.md)을 작성 후 아래와 같이 분류하였습니다.
 
@@ -21,15 +19,29 @@
 
 분류에 따라 팀원 개개인이 과제를 수행했습니다. 리뷰 시간을 정하여 해당 시간에 PR에서 코드리뷰를 했습니다. 투표를 통해 Best Practice를 선정한 후, 다른 과제 중 좋았던 구현들을 의논하여 추가하였습니다. [이슈](https://github.com/Wanted-PreOnboarding-Team-8/pre-onboarding-9th-3-8/issues)와 [PR메시지](https://github.com/Wanted-PreOnboarding-Team-8/pre-onboarding-9th-3-8/pulls)를 활용하여 문서화하였습니다.
 
-## 🌟 Best Practice 선정 및 이유
+## My Part
 
-- **Mar 17, 2023** 　|　**[필터링 기능 구현](https://github.com/Wanted-PreOnboarding-Team-8/pre-onboarding-9th-3-8/issues/1)**
+### Features
+
+- [필터링 기능 구현 PR](https://github.com/Wanted-PreOnboarding-Team-8/pre-onboarding-9th-3-8/pull/20)
+
+- [차트, 호버 기능 구현 PR](https://github.com/Wanted-PreOnboarding-Team-8/pre-onboarding-9th-3-8/pull/7)
+
+### Docs
+
+- [EDA: 목데이터 특성 파악](https://github.com/Wanted-PreOnboarding-Team-8/pre-onboarding-9th-3-8/issues/11)
+
+## Team History
+
+### Features Best Practice
+
+- **Mar 17, 2023** 　|　[필터링 기능 구현](https://github.com/Wanted-PreOnboarding-Team-8/pre-onboarding-9th-3-8/issues/1)
     
     • useSearchParams를 커스텀 훅으로 만들어서 재사용 및 가독성 향상
     
     • 지역에 대한 다중 필터링
     
-- **Mar 15, 2023**  　|　**[차트, 호버 기능 구현](https://github.com/Wanted-PreOnboarding-Team-8/pre-onboarding-9th-3-8/issues/10)**
+- **Mar 15, 2023**  　|　[차트, 호버 기능 구현](https://github.com/Wanted-PreOnboarding-Team-8/pre-onboarding-9th-3-8/issues/10)
     
     • 중복되는 년도, 월을 분리하는 함수를 만든 것
     
@@ -38,13 +50,13 @@
     • useChart 커스텀 훅을 이용한 관심사 분리가 된 점
     
 
-## **🐞 이슈 및 버그**
+### Issues
 
 - **Mar 17, 2023**  　|　[Charts 크기에 따른 하이라이트 이슈](https://github.com/Wanted-PreOnboarding-Team-8/pre-onboarding-9th-3-8/issues/26)
 - **Mar 16, 2023**  　|　[Recharts dot 렌더링 이슈 공유](https://github.com/Wanted-PreOnboarding-Team-8/pre-onboarding-9th-3-8/issues/12)
 - **Mar 15, 2023**  　|　[EDA: 목데이터 특성 파악](https://github.com/Wanted-PreOnboarding-Team-8/pre-onboarding-9th-3-8/issues/11)
 
-## **👨‍💻 팀원 소개**
+## 팀원 소개
 <table border>
   <tbody>
     <tr>
@@ -111,7 +123,7 @@
 </table>
 
 
-## **🚀 기능**
+## 기능
 
 - 시계열 차트
 - 툴팁 표시
@@ -119,7 +131,7 @@
 
 ![demo](https://user-images.githubusercontent.com/17325845/225849849-52da46a7-a5d5-4bb9-b1e9-f21dfbb5fc33.gif)
 
-## ✨ 기술 스택
+## 기술 스택
 
 - React
 - Typescript
@@ -132,13 +144,13 @@
     - 상세한 문서 및 예시
     - 다양한 커스터마이징 기능을 제공
 
-## 🤝 협업 툴
+## 협업 툴
 
 - Discord
 - Notion
 - Github
 
-## **🗂️ 디렉토리 구조**
+## 디렉토리 구조
 
 ```bash
 src
@@ -156,7 +168,7 @@ src
    ┗ chartpage
 ```
 
-## ⚙️ 설치 및 실행 가이드
+## 설치 및 실행 가이드
 
 ### Install
 
