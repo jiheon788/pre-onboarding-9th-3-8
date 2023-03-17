@@ -1,0 +1,43 @@
+.inner {
+  height: 70vh;
+}
+
+/* Filter Item */
+
+.filter_item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  border: var(--p1) solid var(--blue);
+  width: var(--p80);
+  height: var(--p32);
+  font-size: var(--p14);
+  color: var(--blue);
+  border-radius: var(--p32);
+}
+.checked {
+  border: var(--p2) solid var(--blue);
+  font-weight: bold;
+  background: var(--blue-opacity);
+  cursor: pointer;
+}
+.filter_item label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--p2);
+  padding: var(--p5);
+  cursor: pointer;
+}
+.filter_checkbox {
+  display: none;
+}
+
+.checked_img {
+  display: flex;
+  max-width: var(--p16);
+}
+.checked_img img {
+  width: 100%;
+}

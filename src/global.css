@@ -1,0 +1,42 @@
+:root {
+  --white: #ffffff;
+  --blue: #277fe4;
+  --blue-opacity: rgba(39, 127, 228, 0.08);
+  --dark-blue: #202448;
+  --light-gray: #d3d3d3;
+  --background: #ede8e2;
+
+  --bar: #ffdeeb;
+  --bar-highlight: #efa3c8;
+  --area: #bac8ff;
+  --highlight: #97f0ca;
+
+  --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+  /* px to rem */
+  --p1: 0.063rem;
+  --p2: 0.125rem;
+  --p3: 0.188rem;
+  --p4: 0.25rem;
+  --p5: 0.313rem;
+  --p6: 0.375rem;
+  --p7: 0.438rem;
+  --p8: 0.5rem;
+  --p9: 0.563rem;
+  --p10: 0.625rem;
+  --p12: 0.75rem;
+  --p14: 0.875rem;
+  --p16: 1rem;
+  --p18: 1.125rem;
+  --p32: 2rem;
+  --p80: 5rem;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.recharts-cartesian-axis-tick {
+  font-size: var(--p12);
+}

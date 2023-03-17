@@ -1,5 +1,13 @@
+import { Navigate, Route, Routes } from 'react-router-dom';
+import ChartPage from '@/pages/ChartPage/ChartPage';
+
 const Router = () => {
-  return <div>Router</div>;
+  return (
+    <Routes>
+      <Route path="/chart" element={<ChartPage />} />
+      <Route path="/*" element={<Navigate to="/chart" replace={true} />} />
+    </Routes>
+  );
 };
 
 export default Router;

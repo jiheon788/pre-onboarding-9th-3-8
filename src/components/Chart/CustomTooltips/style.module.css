@@ -1,0 +1,33 @@
+/* Custom Tooltip */
+.tooltip {
+  background-color: var(--white);
+  border: var(--p1) solid var(--light-gray);
+  padding: var(--p4) var(--p10);
+  border-radius: var(--p2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title_container {
+  display: flex;
+}
+.img_position {
+  width: var(--p18);
+}
+.img_position img {
+  width: 100%;
+}
+.title {
+  font-size: var(--p18);
+  margin-bottom: var(--p5);
+}
+
+.bar_value {
+  color: var(--bar);
+  font-weight: bold;
+}
+
+.area_value {
+  color: var(--area);
+  font-weight: bold;
+}

@@ -1,0 +1,26 @@
+/* Chart Filter */
+
+.filter_list {
+  display: flex;
+  gap: var(--p10);
+  padding: 0;
+}
+
+.filter_list > li {
+  list-style: none;
+}
+.init_btn {
+  display: block;
+  position: relative;
+  float: left;
+  padding: 5px 10px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1rem;
+  background-color: #aaa;
+  color: #fff;
+  border-radius: 5px;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
